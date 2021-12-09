@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
@@ -96,7 +97,9 @@ public class MainActivity extends AppCompatActivity implements WifiSession.WifiS
     protected void onResume() {
         super.onResume();
         if (!hasPermissions(this, REQUIRED_PERMISSIONS)) {
-            requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_ANDROID);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_ANDROID);
+            }
         }
         updateConfig();
     }
